@@ -1,0 +1,36 @@
+pipeline{
+    agent any
+     
+    stages {
+        stage('Descarga de Librerias Node Modules'){
+            steps{
+                bat 'npm install'
+            }
+        }
+        stage('Pruebas Unitarias MochaJS'){
+            steps{
+                bat 'npm run test'
+            }
+        }
+        stage('Revision de calidad de Codigo SonarQube'){
+            
+            steps{
+                script{
+                    scannerhome = tool 'sonarqube'
+                }
+                withSonarQubeEnv('sonarqube') {
+                    bat 'sonar-scanner'
+                }
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+        stage('Armar artefactos'){
+            steps{
+                bat 'node_modules\\.bin\\gulp'
+            }
+        }
+
+    }
+}
