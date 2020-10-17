@@ -20,6 +20,21 @@ Todos los microservicios fueron desarrollados en base a estas herramientas
 - Lenguaje de programacion Node JS 12.8
 - Manejo de paquetes NPM v 3.5
 
+#### Sistema de archivos del proyecto
+Cada carpeta dentro del src tiene un dockerfile para la construccion personalizada de cada microservicio
+Carpeta logs para verificar los resultados dentro del contenedor en la maquina local
+- logs : Volumen mapeado para revisar logs de contenedores
+- src : codigo del repositorio
+  - cliente: 
+    - Dockerfile
+  - restaurante:
+    - Dockerfile
+  - esb
+    - Dockerfile
+  - repartidor
+    - Dockerfile
+- docker-compose.yml (Archivo de Docker compose)
+
 #### Construccion de Contenedores
 Cada Microservicio dentro del proyecto tiene definido un DockerFile
 que se contruye la imagen al levantar la plataforma con Docker compose
