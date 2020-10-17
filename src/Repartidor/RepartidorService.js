@@ -5,7 +5,7 @@ const app = express();
 const axios = require('axios').default
 
 var fs = require('fs'); var util = require('util');
-var log_file = fs.createWriteStream(__dirname + '/repartidor.log', {flags : 'w'});
+var log_file = fs.createWriteStream('/logs/repartidor.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
 console.log = function(d) { //
@@ -22,7 +22,7 @@ let estado_pedido = 0;
 /**
  *  Puerto del Repartidos : 3002
  */
-app.listen(3002, () => {
+app.listen(80, () => {
     console.log("Servicio Repartidor: 3002");
 });
 
@@ -83,7 +83,7 @@ function finalizarEntrega()
     // Solicitar Pedido
     let parametros = {
         method: 'post',
-        url: 'http://localhost:3004/finentrega-esb', 
+        url: 'http://esb/finentrega-esb', 
     }
     axios(parametros)
         .then( function (response) {

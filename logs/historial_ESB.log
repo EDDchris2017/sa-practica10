@@ -1,0 +1,56 @@
+Servicio ESB: 3004
+====================================
+Pedido de Cliente al Restaurante
+Redirigir respuesta a Restaurante
+CLIENTE -> RESTAURANTE
+====================================
+====================================
+Consultar estado de Cliente al Restaurante
+Redirigir respuesta de estado a Restaurante
+CLIENTE --> RESTAURANTE
+====================================
+====================================
+Consultar estado de Cliente al Restaurante
+Redirigir respuesta de estado a Restaurante
+CLIENTE --> RESTAURANTE
+====================================
+====================================
+Enviar envio pedido Restaurante al Repartidor
+Redirigir respuesta de estado a Repartidor
+RESTAURANTE -> REPARTIDOR
+====================================
+====================================
+Consultar estado de Cliente al Restaurante
+Redirigir respuesta de estado a Restaurante
+CLIENTE --> RESTAURANTE
+====================================
+====================================
+Consultar estado de Cliente al Restaurante
+Redirigir respuesta de estado a Restaurante
+CLIENTE --> RESTAURANTE
+====================================
+====================================
+Consultar estado de Cliente al Repartidor
+Redirigir respuesta de estado a Repartidor
+CLIENTE -> REPARTIDOR
+====================================
+====================================
+Consultar estado de Cliente al Repartidor
+Redirigir respuesta de estado a Repartidor
+CLIENTE -> REPARTIDOR
+====================================
+====================================
+Enviar Marca entrega al Restaurante
+Redirigir respuesta de estado a Restaurante
+REPARTIDOR -> RESTAURANTE
+====================================
+====================================
+Consultar estado de Cliente al Repartidor
+Redirigir respuesta de estado a Repartidor
+CLIENTE -> REPARTIDOR
+====================================
+====================================
+Consultar estado de Cliente al Repartidor
+Redirigir respuesta de estado a Repartidor
+CLIENTE -> REPARTIDOR
+====================================

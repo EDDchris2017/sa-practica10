@@ -1,8 +1,9 @@
 // =========================== SERVICIO DEL CLIENTE ===========================
 const axios = require('axios').default
+const esb = 'http://esb'
 
 var fs = require('fs'); var util = require('util');
-var log_file = fs.createWriteStream(__dirname + '/cliente.log', {flags : 'w'});
+var log_file = fs.createWriteStream('/logs/cliente.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
 console.log = function(d) { //
@@ -43,7 +44,7 @@ function solicitarPedido()
     // Solicitar Pedido
     let parametros = {
         method: 'post',
-        url: 'http://localhost:3004/recibirpedido-esb',
+        url: esb+'/recibirpedido-esb',
         data: {
             cliente: "Christopher",
             pedido: "Hamburguesa Extra Queso con papas y Agua en Lata"
@@ -59,6 +60,10 @@ function solicitarPedido()
         })
         .catch( function (error) {
             console.error(error)
+            setTimeout(function() {
+                solicitarPedido()
+            }, 10000);
+            
         });
 }
 
@@ -69,7 +74,7 @@ function estadoRestaurante()
             // Verificar estado del pedido en restaurante
             let parametros = {
                 method: 'post',
-                url: 'http://localhost:3004/informarestado-esb-restaurante',
+                url: esb + '/informarestado-esb-restaurante',
                 data: {
                     cliente: "Christopher",
                     pedido: "Hamburguesa Extra Queso con papas y Agua en Lata"
@@ -82,9 +87,14 @@ function estadoRestaurante()
                 .then( function (response) {
                     console.log("---> Restaurante ::: "+ response.data.res)
                     cocinado = response.data.estado
+                    if(cocinado == 0)
+                    {
+                        solicitarPedido();
+                    }
                 })
                 .catch( function (error) {
                     console.error(error)
+                    console.error("error al consultar restaurante")
                 });
 
 }
@@ -95,7 +105,7 @@ function estadoRepartidor()
     // Verificar estado del pedido con el repartidor
     let parametros = {
         method: 'post',
-        url: 'http://localhost:3004/informarestado-esb-repartidor',
+        url: esb + '/informarestado-esb-repartidor',
         datos : {
             cliente : "Christopher"
         },
@@ -109,6 +119,6 @@ function estadoRepartidor()
             entregado = response.data.estado
         })
         .catch( function (error) {
-            console.error(error)
+            console.error("error al consultar repartidor")
         });
 }

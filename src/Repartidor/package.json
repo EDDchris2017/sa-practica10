@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EDDchris2017/sa-practica10.git"
+    "url": "git+https://github.com/EDDchris2017/sa-practicas-devops.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EDDchris2017/sa-practica10/issues"
+    "url": "https://github.com/EDDchris2017/sa-practicas-devops/issues"
   },
-  "homepage": "https://github.com/EDDchris2017/sa-practica10#readme",
+  "homepage": "https://github.com/EDDchris2017/sa-practicas-devops#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
     "mocha-sonar-generic-test-coverage": "0.0.6",

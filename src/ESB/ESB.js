@@ -1,6 +1,6 @@
 // =========================== DATOS DE SERVICIOS ===========================
-const service_restaurante = "http://localhost:3003"
-const service_repartidor  = "http://localhost:3002" 
+const service_restaurante = "restaurante"
+const service_repartidor  = "repartidor" 
 
 // =========================== SERVICIO DEL ESB ===========================
 
@@ -10,7 +10,7 @@ const app = express();
 const axios = require('axios').default
 
 var fs = require('fs'); var util = require('util');
-var log_file = fs.createWriteStream(__dirname + '/historial_ESB.log', {flags : 'w'});
+var log_file = fs.createWriteStream('/logs/historial_ESB.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
 console.log = function(d) { //
@@ -22,10 +22,15 @@ console.log = function(d) { //
 /**
  *  Puerto del ESB : 3004
  */
-app.listen(3004, () => {
+app.listen(80, () => {
     console.log("Servicio ESB: 3004");
 });
 app.use(bodyParser.json());
+
+app.get('/', function (req, res) {
+    res.send('ESB activo');
+    res.status(200)
+});
 
 app.post('/recibirpedido-esb', function (request, res){
     console.log("====================================")
@@ -34,7 +39,7 @@ app.post('/recibirpedido-esb', function (request, res){
     console.log("CLIENTE -> RESTAURANTE")
     console.log("====================================")
 
-    enviarDatos(service_restaurante + "/recibirpedido",request.body,function(msg){
+    enviarDatos('http://'+service_restaurante + "/recibirpedido",request.body,function(msg){
         res.send(msg)
     })
 });
@@ -50,7 +55,7 @@ app.post('/informarestado-esb-restaurante', function (request, res){
     msg = enviarDatos(service_restaurante + "/informarestado",request.body)
     console.log("MENSAJE REPARTIDOR \n" + msg)*/
 
-    enviarDatos(service_restaurante + "/informarestado",request.body,function(msg){
+    enviarDatos('http://'+service_restaurante + "/informarestado",request.body,function(msg){
         res.send(msg)
     })
     
@@ -63,7 +68,7 @@ app.post('/informarestado-esb-repartidor', function (request, res){
     console.log("CLIENTE -> REPARTIDOR")
     console.log("====================================")
     
-    enviarDatos(service_repartidor + "/informarestado",request.body,function(msg){
+    enviarDatos('http://'+service_repartidor + "/informarestado",request.body,function(msg){
         res.send(msg)
     })
 });
@@ -75,7 +80,7 @@ app.post('/recibirentrega-esb-repartidor', function (request, res){
     console.log("RESTAURANTE -> REPARTIDOR")
     console.log("====================================")
 
-    enviarDatos(service_repartidor + "/recibirentrega",request.body,function(msg){
+    enviarDatos('http://'+service_repartidor + "/recibirentrega",request.body,function(msg){
         res.send(msg)
     })
 });
@@ -87,7 +92,7 @@ app.post('/finentrega-esb', function (request, res){
     console.log("REPARTIDOR -> RESTAURANTE")
     console.log("====================================")
 
-    enviarDatos(service_restaurante + "/finentrega",request.body,function(msg){
+    enviarDatos('http://'+service_restaurante + "/finentrega",request.body,function(msg){
         res.send(msg)
     })
 });
