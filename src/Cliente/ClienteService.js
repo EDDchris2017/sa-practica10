@@ -58,7 +58,11 @@ function solicitarPedido()
             //estadoRestaurante()
         })
         .catch( function (error) {
-            console.error(error)
+            console.error("Error al solicitar pedido")
+            setTimeout(function() {
+                solicitarPedido()
+            }, 10000);
+            
         });
 }
 
@@ -84,7 +88,7 @@ function estadoRestaurante()
                     cocinado = response.data.estado
                 })
                 .catch( function (error) {
-                    console.error(error)
+                    console.error("error al consultar restaurante")
                 });
 
 }
@@ -109,6 +113,6 @@ function estadoRepartidor()
             entregado = response.data.estado
         })
         .catch( function (error) {
-            console.error(error)
+            console.error("error al consultar repartidor")
         });
 }

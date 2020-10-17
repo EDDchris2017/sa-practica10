@@ -2,23 +2,15 @@ version: "3.8"
 services:
     esb:
         build: ./src/ESB
-        volumes:
-            - ./src/ESB:/code
         ports:
-            - ${ESB_PORT}:3004
+            - "${ESB_PORT}:3004"
     restaurante:
         build: ./src/Restaurante
-        volumes:
-            - ./src/Restaurante:/code
         ports:
-            - ${REST_PORT}:3003
+            - "${REST_PORT}:3003"
     repartidor:
         build: ./src/Repartidor
-        volumes:
-            - ./src/Repartidor:/code
         ports:
-            - ${REPART_PORT}:3002
+            - "${REPART_PORT}:3002"
     cliente:
         build: ./src/Cliente
-        volumes:
-            - ./src/Cliente:/code
