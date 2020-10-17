@@ -1,6 +1,7 @@
 FROM node:latest
 WORKDIR /code
-COPY . .
+RUN mkdir /logs
+COPY . . 
 RUN npm install
 CMD ["node", "ClienteService.js"]
 
